@@ -1,4 +1,4 @@
-module SimpleCovLcov
+module SimpleCovLcovFormatter
   class Configuration
     attr_writer :report_with_single_file
     attr_writer :output_directory

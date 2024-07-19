@@ -16,7 +16,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'rspec'
 require 'simplecov'
-require 'simplecov-lcov'
+require 'simplecov_lcov_formatter'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.

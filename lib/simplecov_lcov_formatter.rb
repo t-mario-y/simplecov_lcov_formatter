@@ -1,8 +1,8 @@
 require 'fileutils'
 require 'pathname'
-require_relative 'simple_cov_lcov/configuration'
+require 'simplecov'
 
-fail 'simplecov-lcov requires simplecov' unless defined?(SimpleCov)
+require_relative 'simplecov_lcov_formatter/configuration'
 
 module SimpleCov
   module Formatter
@@ -25,7 +25,7 @@ module SimpleCov
 
       class << self
         def config
-          @config ||= SimpleCovLcov::Configuration.new
+          @config ||= SimpleCovLcovFormatter::Configuration.new
           yield @config if block_given?
           @config
         end

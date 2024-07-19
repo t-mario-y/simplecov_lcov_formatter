@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-describe SimpleCovLcov::Configuration do
+describe SimpleCovLcovFormatter::Configuration do
   subject(:configuration) { described_class.new }
 
   describe '#output_directory' do
