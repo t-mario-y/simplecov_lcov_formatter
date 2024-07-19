@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency('activesupport', '> 0')
   s.add_development_dependency('rspec', '> 0')
+  s.add_development_dependency('syntax_tree', '> 0')
 
   s.add_dependency('simplecov', '>= 0.18')
 end
