@@ -11,6 +11,5 @@ group :development do
   gem 'rake'
   gem 'bundler'
   gem 'simplecov', '~> 0.18'
-  gem 'coveralls', require: false
   gem 'activesupport'
 end

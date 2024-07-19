@@ -1,5 +1,4 @@
 require 'simplecov'
-require 'coveralls'
 require 'fileutils'
 
 module SimpleCov::Configuration
@@ -14,7 +13,6 @@ end
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
 ])
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))

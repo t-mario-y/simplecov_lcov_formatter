@@ -16,10 +16,8 @@ Gem::Specification.new do |s|
     "README.markdown"
   ]
   s.files = [
-    ".coveralls.yml",
     ".document",
     ".rspec",
-    ".tachikoma.yml",
     ".travis.yml",
     "Gemfile",
     "LICENSE.txt",
@@ -53,7 +51,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<bundler>.freeze, [">= 0"])
       s.add_development_dependency(%q<rake>.freeze, [">= 0"])
       s.add_development_dependency(%q<simplecov>.freeze, ["~> 0.18"])
-      s.add_development_dependency(%q<coveralls>.freeze, [">= 0"])
       s.add_development_dependency(%q<activesupport>.freeze, [">= 0"])
     else
       s.add_dependency(%q<rspec>.freeze, [">= 0"])
@@ -61,7 +58,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<bundler>.freeze, [">= 0"])
       s.add_dependency(%q<rake>.freeze, [">= 0"])
       s.add_dependency(%q<simplecov>.freeze, ["~> 0.18"])
-      s.add_dependency(%q<coveralls>.freeze, [">= 0"])
       s.add_dependency(%q<activesupport>.freeze, [">= 0"])
     end
   else
@@ -70,7 +66,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>.freeze, [">= 0"])
     s.add_dependency(%q<rake>.freeze, [">= 0"])
     s.add_dependency(%q<simplecov>.freeze, ["~> 0.18"])
-    s.add_dependency(%q<coveralls>.freeze, [">= 0"])
     s.add_dependency(%q<activesupport>.freeze, [">= 0"])
   end
 end
