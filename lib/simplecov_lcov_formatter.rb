@@ -1,8 +1,8 @@
 require 'fileutils'
 require 'pathname'
-require_relative 'simple_cov_lcov/configuration'
+require 'simplecov'
 
-fail 'simplecov-lcov requires simplecov' unless defined?(SimpleCov)
+require_relative 'simplecov_lcov_formatter/configuration'
 
 module SimpleCov
   module Formatter
@@ -25,16 +25,16 @@ module SimpleCov
 
       class << self
         def config
-          @config ||= SimpleCovLcov::Configuration.new
+          @config ||= SimpleCovLcovFormatter::Configuration.new
           yield @config if block_given?
           @config
         end
 
         def report_with_single_file=(value)
-          deprecation_message = \
+          deprecation_message =
             "#{caller(1..1).first} " \
-            "`#{LcovFormatter}.report_with_single_file=` is deprecated. " \
-            "Use `#{LcovFormatter}.config.report_with_single_file=` instead"
+              "`#{LcovFormatter}.report_with_single_file=` is deprecated. " \
+              "Use `#{LcovFormatter}.config.report_with_single_file=` instead"
 
           warn deprecation_message
           config.report_with_single_file = value
@@ -65,20 +65,15 @@ module SimpleCov
       end
 
       def write_lcov!(file)
-        File.open(File.join(output_directory, output_filename(file.filename)), 'w') do |f|
-          f.write format_file(file)
-        end
+        File.open(File.join(output_directory, output_filename(file.filename)), 'w') { |f| f.write format_file(file) }
       end
 
       def write_lcov_to_single_file!(files)
-        File.open(single_report_path, 'w') do |f|
-          files.each { |file| f.write format_file(file) }
-        end
+        File.open(single_report_path, 'w') { |f| files.each { |file| f.write format_file(file) } }
       end
 
       def output_filename(filename)
-        filename.gsub("#{SimpleCov.root}/", '').gsub('/', '-')
-          .tap { |name| name << '.lcov' }
+        filename.gsub("#{SimpleCov.root}/", '').gsub('/', '-').tap { |name| name << '.lcov' }
       end
 
       def format_file(file)
@@ -93,8 +88,8 @@ module SimpleCov
           pieces << "BRF:#{file.total_branches.length}"
           pieces << "BRH:#{file.covered_branches.length}"
         end
-        pieces << "end_of_record"
-        pieces << ""
+        pieces << 'end_of_record'
+        pieces << ''
         pieces.join("\n")
       end
 
@@ -109,9 +104,7 @@ module SimpleCov
       end
 
       def format_lines(file)
-        filtered_lines(file)
-          .map { |line| format_line(line) }
-          .join("\n")
+        filtered_lines(file).map { |line| format_line(line) }.join("\n")
       end
 
       def filtered_lines(file)
