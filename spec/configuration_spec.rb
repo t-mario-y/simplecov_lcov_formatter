@@ -13,9 +13,7 @@ describe SimpleCovLcov::Configuration do
     context 'when directory is customized' do
       let(:custom_directory_path) { 'some/custom/path' }
 
-      before do
-        configuration.output_directory = custom_directory_path
-      end
+      before { configuration.output_directory = custom_directory_path }
 
       it 'returns customized directory path' do
         expect(configuration.output_directory).to eq custom_directory_path
@@ -23,9 +21,7 @@ describe SimpleCovLcov::Configuration do
     end
 
     context 'when single_report_path is customized' do
-      before do
-        configuration.single_report_path = 'some/custom/path/lcov.info'
-      end
+      before { configuration.single_report_path = 'some/custom/path/lcov.info' }
 
       it 'sets correct path' do
         expect(configuration.output_directory).to eq 'some/custom/path'
@@ -39,9 +35,7 @@ describe SimpleCovLcov::Configuration do
     end
 
     context 'when report_with_single_file set to true' do
-      before do
-        configuration.report_with_single_file = true
-      end
+      before { configuration.report_with_single_file = true }
 
       it { is_expected.to be_report_with_single_file }
     end
@@ -61,9 +55,7 @@ describe SimpleCovLcov::Configuration do
     context 'when file name is customised' do
       let(:custom_file_name) { 'my-custom-file.info' }
 
-      before do
-        configuration.lcov_file_name = custom_file_name
-      end
+      before { configuration.lcov_file_name = custom_file_name }
 
       it 'returns path with custom file name' do
         path_with_custom_file_name = File.join(default_single_report_dir, custom_file_name)
@@ -74,9 +66,7 @@ describe SimpleCovLcov::Configuration do
     context 'when output directory is customised' do
       let(:custom_file_directory) { 'path/to/my/custom/dir' }
 
-      before do
-        configuration.output_directory = custom_file_directory
-      end
+      before { configuration.output_directory = custom_file_directory }
 
       it 'returns path with custom file name' do
         customized_path = File.join(custom_file_directory, default_file_name)
@@ -87,9 +77,7 @@ describe SimpleCovLcov::Configuration do
     context 'when single_report_path is customised' do
       let(:custom_path) { 'my/path/with/file.lcov' }
 
-      before do
-        configuration.single_report_path = custom_path
-      end
+      before { configuration.single_report_path = custom_path }
 
       it 'returns customised path' do
         expect(configuration.single_report_path).to eq custom_path
