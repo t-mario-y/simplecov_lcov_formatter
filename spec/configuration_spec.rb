@@ -49,7 +49,7 @@ describe SimpleCovLcov::Configuration do
 
   describe '#single_report_path' do
     let(:default_single_report_dir) { File.join(SimpleCov.coverage_path, 'lcov') }
-    let(:default_file_name) { 'simplecov-lcov.lcov' }
+    let(:default_file_name) { 'simplecov_lcov_formatter.lcov' }
 
     context 'when no path customisations where made' do
       it 'returns default path' do
