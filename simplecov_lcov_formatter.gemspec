@@ -15,6 +15,8 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.5'
 
+  s.metadata['rubygems_mfa_required'] = 'true'
+
   s.add_development_dependency('activesupport', '> 0')
   s.add_development_dependency('rspec', '> 0')
   s.add_development_dependency('syntax_tree', '> 0')
