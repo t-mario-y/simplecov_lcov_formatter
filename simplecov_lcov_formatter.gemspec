@@ -13,6 +13,8 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/t-mario-y/simplecov_lcov_formatter'
   s.licenses = 'MIT'
 
+  s.required_ruby_version = '>= 2.5'
+
   s.add_development_dependency('activesupport', '> 0')
   s.add_development_dependency('rspec', '> 0')
   s.add_development_dependency('syntax_tree', '> 0')
