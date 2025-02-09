@@ -61,6 +61,7 @@ module SimpleCov
 
       def create_output_directory!
         return if Dir.exist?(output_directory)
+
         FileUtils.mkdir_p(output_directory)
       end
 
