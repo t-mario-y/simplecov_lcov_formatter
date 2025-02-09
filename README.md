@@ -1,5 +1,8 @@
 # simplecov_lcov_formatter
 
+[![Gem Version](https://badge.fury.io/rb/simplecov_lcov_formatter.svg)](https://badge.fury.io/rb/simplecov_lcov_formatter)
+[![Ruby specs](https://github.com/t-mario-y/simplecov_lcov_formatter/actions/workflows/ruby.yml/badge.svg)](https://github.com/t-mario-y/simplecov_lcov_formatter/actions/workflows/ruby.yml)
+
 LCOV formatter for SimpleCov. Successor of [simplecov-lcov](https://github.com/fortissimo1997/simplecov-lcov).
 
 ## Usage
