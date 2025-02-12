@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 require 'fileutils'
 
@@ -22,9 +24,7 @@ require 'simplecov_lcov_formatter'
 # Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
-  config.before(:each) do
-    if Dir.exist?(SimpleCov::Formatter::LcovFormatter.config.output_directory)
-      FileUtils.remove_dir(SimpleCov::Formatter::LcovFormatter.config.output_directory, true)
-    end
+  config.before do
+    FileUtils.rm_rf(SimpleCov::Formatter::LcovFormatter.config.output_directory)
   end
 end

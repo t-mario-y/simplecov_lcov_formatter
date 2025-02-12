@@ -1,11 +1,16 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+# frozen_string_literal: true
+
 require 'active_support/core_ext/kernel/reporting'
+
+require 'spec_helper'
 
 module SimpleCov::Formatter
   describe LcovFormatter do
     let(:branch_coverage_enabled) { false }
 
     before do
+      allow($stdout).to receive(:puts) # Silence "Lcov style coverage report generated..." message
+
       SimpleCov.clear_coverage_criteria
       SimpleCov.enable_coverage :branch if branch_coverage_enabled
       SimpleCov.start { add_filter '/.rvm/' }
@@ -17,7 +22,7 @@ module SimpleCov::Formatter
     describe '#format' do
       let(:simplecov_result) { SimpleCov.result }
 
-      context 'generating report per file' do
+      context 'when generating one report per file' do
         before { LcovFormatter.new.format(simplecov_result) }
 
         describe File do
@@ -25,7 +30,7 @@ module SimpleCov::Formatter
 
           it do
             expect(File).to exist(
-              File.join(LcovFormatter.config.output_directory, 'spec-fixtures-app-models-user.rb.lcov'),
+              File.join(LcovFormatter.config.output_directory, 'spec-fixtures-app-models-user.rb.lcov')
             )
           end
         end
@@ -71,7 +76,7 @@ module SimpleCov::Formatter
         end
       end
 
-      context 'generating single file report' do
+      context 'when generating a single file report' do
         before do
           LcovFormatter.config.report_with_single_file = true
           LcovFormatter.new.format(simplecov_result)
