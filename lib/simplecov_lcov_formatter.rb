@@ -89,7 +89,7 @@ module SimpleCov
 
         if SimpleCov.branch_coverage?
           branch_data = format_branches(file)
-          pieces << branch_data if branch_data.length > 0
+          pieces << branch_data unless branch_data.empty?
           pieces << "BRF:#{file.total_branches.length}"
           pieces << "BRH:#{file.covered_branches.length}"
         end
