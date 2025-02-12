@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'fileutils'
 require 'pathname'
 require 'simplecov'
@@ -66,7 +68,7 @@ module SimpleCov
       end
 
       def write_lcov!(file)
-        File.open(File.join(output_directory, output_filename(file.filename)), 'w') { |f| f.write format_file(file) }
+        File.write(File.join(output_directory, output_filename(file.filename)), format_file(file))
       end
 
       def write_lcov_to_single_file!(files)
@@ -74,7 +76,7 @@ module SimpleCov
       end
 
       def output_filename(filename)
-        filename.gsub("#{SimpleCov.root}/", '').gsub('/', '-').tap { |name| name << '.lcov' }
+        filename.gsub("#{SimpleCov.root}/", '').tr('/', '-').tap { |name| name << '.lcov' }
       end
 
       def format_file(file)
@@ -82,12 +84,12 @@ module SimpleCov
         pieces = []
         pieces << "SF:#{filename}"
         pieces << format_lines(file)
-        pieces << "LF:#{file.lines.count { |el| el.coverage }}"
+        pieces << "LF:#{file.lines.count(&:coverage)}"
         pieces << "LH:#{file.lines.count { |el| el.coverage && el.coverage > 0 }}"
 
         if SimpleCov.branch_coverage?
           branch_data = format_branches(file)
-          pieces << branch_data if branch_data.length > 0
+          pieces << branch_data unless branch_data.empty?
           pieces << "BRF:#{file.total_branches.length}"
           pieces << "BRH:#{file.covered_branches.length}"
         end

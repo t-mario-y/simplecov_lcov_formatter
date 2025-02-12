@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 module SimpleCovLcovFormatter
   class Configuration
-    attr_writer :report_with_single_file
-    attr_writer :output_directory
-    attr_writer :lcov_file_name
+    attr_writer :report_with_single_file, :output_directory, :lcov_file_name
 
     def report_with_single_file?
       !!@report_with_single_file
