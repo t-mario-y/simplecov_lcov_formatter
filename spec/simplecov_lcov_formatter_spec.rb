@@ -1,10 +1,16 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+# frozen_string_literal: true
+
 require 'active_support/core_ext/kernel/reporting'
+
+require 'spec_helper'
 
 module SimpleCov::Formatter
   describe LcovFormatter do
     let(:branch_coverage_enabled) { false }
+
     before do
+      allow($stdout).to receive(:puts) # Silence "Lcov style coverage report generated..." message
+
       SimpleCov.clear_coverage_criteria
       SimpleCov.enable_coverage :branch if branch_coverage_enabled
       SimpleCov.start { add_filter '/.rvm/' }
@@ -16,11 +22,12 @@ module SimpleCov::Formatter
     describe '#format' do
       let(:simplecov_result) { SimpleCov.result }
 
-      context 'generating report per file' do
+      context 'when generating one report per file' do
         before { LcovFormatter.new.format(simplecov_result) }
 
         describe File do
           it { expect(File).to exist(File.join(LcovFormatter.config.output_directory, 'spec-fixtures-hoge.rb.lcov')) }
+
           it do
             expect(File).to exist(
               File.join(LcovFormatter.config.output_directory, 'spec-fixtures-app-models-user.rb.lcov'),
@@ -31,6 +38,7 @@ module SimpleCov::Formatter
         describe 'spec-fixtures-hoge.rb.lcov' do
           let(:output_path) { File.join(LcovFormatter.config.output_directory, 'spec-fixtures-hoge.rb.lcov') }
           let(:fixture) { File.read("#{File.dirname(__FILE__)}/fixtures/lcov/spec-fixtures-hoge.rb.lcov") }
+
           it { expect(File.read(output_path)).to eq(fixture) }
         end
 
@@ -39,6 +47,7 @@ module SimpleCov::Formatter
             File.join(LcovFormatter.config.output_directory, 'spec-fixtures-app-models-user.rb.lcov')
           end
           let(:fixture) { File.read("#{File.dirname(__FILE__)}/fixtures/lcov/spec-fixtures-app-models-user.rb.lcov") }
+
           it { expect(File.read(output_path)).to eq(fixture) }
         end
 
@@ -49,6 +58,7 @@ module SimpleCov::Formatter
             describe 'spec-fixtures-hoge.rb.branch.lcov' do
               let(:output_path) { File.join(LcovFormatter.config.output_directory, 'spec-fixtures-hoge.rb.lcov') }
               let(:fixture) { File.read("#{File.dirname(__FILE__)}/fixtures/lcov/spec-fixtures-hoge.rb.branch.lcov") }
+
               it { expect(File.read(output_path)).to eq(fixture) }
             end
 
@@ -59,13 +69,14 @@ module SimpleCov::Formatter
               let(:fixture) do
                 File.read("#{File.dirname(__FILE__)}/fixtures/lcov/spec-fixtures-app-models-user.rb.branch.lcov")
               end
+
               it { expect(File.read(output_path)).to eq(fixture) }
             end
           end
         end
       end
 
-      context 'generating single file report' do
+      context 'when generating a single file report' do
         before do
           LcovFormatter.config.report_with_single_file = true
           LcovFormatter.new.format(simplecov_result)
@@ -81,6 +92,7 @@ module SimpleCov::Formatter
           let(:fixture_of_user) do
             File.read("#{File.dirname(__FILE__)}/fixtures/lcov/spec-fixtures-app-models-user.rb.lcov")
           end
+
           it { expect(File.read(output_path)).to match(fixture_of_hoge) }
           it { expect(File.read(output_path)).to match(fixture_of_user) }
         end

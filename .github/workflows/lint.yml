@@ -1,0 +1,50 @@
+name: Lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  syntax_tree:
+    name: SyntaxTree
+    runs-on: ${{ matrix.os }}
+    env:
+      BUNDLE_JOBS: 4
+      BUNDLE_RETRY: 3
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        ruby-version: ['3.4']
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+    - name: SyntaxTree
+      run: bundle exec stree check **/*.rb
+
+  rubocop:
+    name: RuboCop
+    runs-on: ${{ matrix.os }}
+    env:
+      BUNDLE_JOBS: 4
+      BUNDLE_RETRY: 3
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        ruby-version: ['3.4']
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+    - name: RuboCop
+      run: bundle exec rubocop --format github

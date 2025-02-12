@@ -1,0 +1,28 @@
+inherit_from: .rubocop_todo.yml
+
+inherit_gem:
+  syntax_tree:
+    - config/rubocop.yml
+
+require:
+  - rubocop-packaging
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  DisplayStyleGuide: true
+  ExtraDetails: true
+  TargetRubyVersion: 2.5
+  Exclude:
+    - .git/**/*
+    - spec/fixtures/**/*
+    - tmp/**/*
+    - vendor/**/*
+
+Style/Documentation:
+  Enabled: false
+
+# TODO: Syntax Tree uses double_quotes, but does not raise a warning
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
