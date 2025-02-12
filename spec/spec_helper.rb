@@ -24,7 +24,5 @@ require 'simplecov_lcov_formatter'
 # Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
-  config.before do
-    FileUtils.rm_rf(SimpleCov::Formatter::LcovFormatter.config.output_directory)
-  end
+  config.before { FileUtils.rm_rf(SimpleCov::Formatter::LcovFormatter.config.output_directory) }
 end

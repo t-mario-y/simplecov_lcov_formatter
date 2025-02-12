@@ -30,7 +30,7 @@ module SimpleCov::Formatter
 
           it do
             expect(File).to exist(
-              File.join(LcovFormatter.config.output_directory, 'spec-fixtures-app-models-user.rb.lcov')
+              File.join(LcovFormatter.config.output_directory, 'spec-fixtures-app-models-user.rb.lcov'),
             )
           end
         end
