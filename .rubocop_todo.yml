@@ -35,11 +35,3 @@ Style/ClassAndModuleChildren:
   Exclude:
     - 'spec/simplecov_lcov_formatter_spec.rb'
     - 'spec/spec_helper.rb'
-
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle, AllowedMethods, AllowedPatterns.
-# SupportedStyles: predicate, comparison
-Style/NumericPredicate:
-  Exclude:
-    - 'spec/**/*'
-    - 'lib/simplecov_lcov_formatter.rb'
