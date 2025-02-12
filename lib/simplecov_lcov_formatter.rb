@@ -66,7 +66,7 @@ module SimpleCov
       end
 
       def write_lcov!(file)
-        File.open(File.join(output_directory, output_filename(file.filename)), 'w') { |f| f.write format_file(file) }
+        File.write(File.join(output_directory, output_filename(file.filename)), format_file(file))
       end
 
       def write_lcov_to_single_file!(files)
@@ -74,7 +74,7 @@ module SimpleCov
       end
 
       def output_filename(filename)
-        filename.gsub("#{SimpleCov.root}/", '').gsub('/', '-').tap { |name| name << '.lcov' }
+        filename.gsub("#{SimpleCov.root}/", '').tr('/', '-').tap { |name| name << '.lcov' }
       end
 
       def format_file(file)
